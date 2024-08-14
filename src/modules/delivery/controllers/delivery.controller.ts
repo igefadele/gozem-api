@@ -9,6 +9,7 @@ import { Request, Response } from 'express';
 import { hasEmptyFields } from '../../../core/utils';
 
 
+
 /// FINDALL
 /// Fetch all deliveries in the database
 export const findAll = async () => {
