@@ -1,7 +1,8 @@
 // ===========
 // API SERVER FILE
 
-import express from 'express';
+
+import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -31,6 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger);
 app.use(rateLimiter);
 
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({message: "Server works"})
+});
 app.use('/api', apiRoutes);
 
 app.use(serverErrorHandler);
