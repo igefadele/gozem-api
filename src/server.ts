@@ -1,5 +1,6 @@
-// ===========
-// API SERVER FILE
+/* ===========
+API SERVER FILE 
+*/
 
 
 import express from 'express';
@@ -15,12 +16,15 @@ import { logger } from './configs/logger.config';
 import apiRoutes from './routes';
 import { serverErrorHandler } from './core/middlewares/server_error_handler.middleware';
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
+import { connectDB } from './configs/databases/mongodb.config';
 
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+connectDB(); // Run the MongoDB Connection Function
 
 app.use(sessionConfig);
 app.use(express.json());

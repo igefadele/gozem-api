@@ -1,20 +1,21 @@
-import { MongoClient, Db } from 'mongodb';
+/* 
+================
+MONGODB CONNECTION 
+*/
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'mydatabase';
+import mongoose from 'mongoose';
 
-let db: Db;
+const MONGODB_URL: string = process.env.MONGODB_URL as string;
 
-export const connectToDatabase = async (): Promise<Db> => {
-    if (db) return db; // If already connected, return the existing connection
 
-    try {
-        const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-        console.log("Connected successfully to MongoDB");
-        db = client.db(dbName);
-        return db;
-    } catch (err) {
-        console.error("Failed to connect to MongoDB", err);
-        throw err;
-    }
+// Connect to MongoDB using Mongoose
+export const connectDB = async () => {
+  try {
+      await mongoose.connect(MONGODB_URL);
+      console.log('Connected to MongoDB');
+  } catch (error) {
+      console.error('Failed to connect to MongoDB', error);
+      process.exit(1); // Exit the process if the connection fails
+  }
 };
+
