@@ -8,6 +8,7 @@ DELIVERY MODEL
 import { DeliveryStatus } from "../../../core/enums";
 import { LocationModel, LocationSchema } from "../../../core/models/location.model";
 import { Schema, model, Document } from 'mongoose';
+import { validateGuid } from "../../../core/utils/validators";
 
 export interface IDelivery extends Document {
   delivery_id: string;
@@ -24,6 +25,10 @@ const DeliverySchema = new Schema<IDelivery>({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: validateGuid,
+      message: '{VALUE} is not a valid GUID',
+    },
   },
   package_id: {
     type: String,

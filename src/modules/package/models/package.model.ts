@@ -7,6 +7,7 @@ PACKAGE MODEL
 
 import { LocationModel, LocationSchema } from "../../../core/models/location.model";
 import { Schema, model, Document } from 'mongoose';
+import { validateGuid } from "../../../core/utils/validators";
 
 export interface IPackage extends Document {
   package_id: string;
@@ -29,7 +30,11 @@ const PackageSchema = new Schema<IPackage>({
   package_id: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: validateGuid,
+      message: '{VALUE} is not a valid GUID',
+    },
   },
   active_delivery_id: {
     type: String,
