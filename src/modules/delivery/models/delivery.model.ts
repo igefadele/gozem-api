@@ -41,11 +41,11 @@ const deliverySchema = new Schema<IDelivery>({
   start_time: {
     type: Date,
     required: true,
-  },  // timestamp
+  }, // timestamp
   end_time: {
     type: Date,
     required: true,
-  },    // timestamp
+  }, // timestamp
   location: {
     type: locationSchema,
     required: true,

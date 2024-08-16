@@ -1,3 +1,8 @@
+/** 
+==================
+LOCATION MODEL
+*/
+
 import { Schema } from "mongoose";
 
 export interface LocationModel {

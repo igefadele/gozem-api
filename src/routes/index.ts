@@ -11,7 +11,7 @@ import { router as packageRouter } from '../modules/package/routes/package.route
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response) => {
-  res.status(200).json({message: "Server works"})
+  res.status(200).json({ message: "Server works" });
 });
 
 router.use('/delivery', deliveryRouter);

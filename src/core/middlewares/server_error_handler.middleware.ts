@@ -1,4 +1,4 @@
-/* 
+/** 
 ===============
 SERVER ERROR MIDDLEWARE
 */

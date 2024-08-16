@@ -26,8 +26,6 @@ console.log("MONGODB_URL", process.env.MONGODB_URL);
 
 const app = express();
 
-console.log('uuid', uuidv4())
-
 // Run the MongoDB Connection Function
 connectDB(); 
 

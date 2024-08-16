@@ -4,12 +4,10 @@ PACKAGE CONTROLLER
 ==============
 */
 
-import express from 'express';
 import { Request, Response } from 'express';
-import { hasEmptyFields } from '../../../core/utils';
 import * as br from '../../../core/repositories/base.repository'; // br = baseRepository
 import { EntityKey } from '../../../core/enums';
-import { IPackage, PackageModel } from '../models/package.model';
+import { IPackage } from '../models/package.model';
 import { ResponseHandler } from '../../../core/models/response_handler';
 
 

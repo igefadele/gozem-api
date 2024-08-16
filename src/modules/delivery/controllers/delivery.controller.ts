@@ -4,12 +4,10 @@ DELIVERY CONTROLLER
 ==============
 */
 
-import express from 'express';
 import { Request, Response } from 'express';
-import { hasEmptyFields } from '../../../core/utils';
 import * as br from '../../../core/repositories/base.repository';
 import { EntityKey } from '../../../core/enums';
-import { DeliveryModel, IDelivery } from '../models/delivery.model';
+import { IDelivery } from '../models/delivery.model';
 import { ResponseHandler } from '../../../core/models/response_handler';
 
 
