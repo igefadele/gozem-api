@@ -52,6 +52,8 @@
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.11",
-    "@types/nodemailer": "^6.4.15"
+    "@types/nodemailer": "^6.4.15",
+    "@types/ws": "^8.5.12",
+    "ws": "^8.18.0"
   }
 }

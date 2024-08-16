@@ -3,7 +3,7 @@
 BASE ENUMS
 */
 
-export enum EntityKey{
+export enum EntityKey {
   delivery = 'delivery',
   package = 'package',
 }
@@ -16,3 +16,8 @@ export enum DeliveryStatus {
   failed = 'failed',
 }
 
+export enum WsEventType {
+  location_changed = "location_changed",
+  status_changed = "status_changed",
+  delivery_updated = "delivery_updated",
+}

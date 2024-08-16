@@ -19,3 +19,6 @@ export const DOC_CREATED = "Document is created and added to database collection
 export const DOC_DELETED = "Document is deleted from the database collection";
 export const DOC_UPDATED = "Document is updated in the database collection";
 export const ID_NOT_MATCH = "The document specified ID does not match the actual document ID to be updated";
+
+export const CONNECTION = "connection";
+export const MESSAGE = "message";
