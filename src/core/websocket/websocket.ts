@@ -1,8 +1,10 @@
-import { WebSocketServer } from 'ws';
+/**  
+==============
+WEBSOCKET METHODS
+*/
 import { DeliveryEventPayload, DeliveryUpdatedPayload } from '../models/ws_events_models';
 import { IDelivery } from '../../modules/delivery/models/delivery.model';
 import { DeliveryStatus, WsEventType } from '../enums';
-import { CONNECTION, MESSAGE } from '../constants';
 import { io } from '../../configs/socketio.config';
 
 
