@@ -4,7 +4,9 @@ MONGODB CONNECTION
 */
 
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const MONGODB_URL: string = process.env.MONGODB_URL as string;
 
 

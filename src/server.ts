@@ -21,6 +21,7 @@ import { connectDB } from './configs/databases/mongodb.config';
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
+console.log("MONGODB_URL", process.env.MONGODB_URL);
 
 const app = express();
 
