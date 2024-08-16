@@ -21,4 +21,7 @@ export const DOC_UPDATED = "Document is updated in the database collection";
 export const ID_NOT_MATCH = "The document specified ID does not match the actual document ID to be updated";
 
 export const CONNECTION = "connection";
+export const DISCONNECT = "disconnect";
 export const MESSAGE = "message";
+export const SOCKETIO_CONNECTED = "SocketIO connection from a client is established";
+export const SOCKETIO_DISCONNECTED = "SocketIO connection disconnected";
