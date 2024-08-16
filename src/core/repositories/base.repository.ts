@@ -5,13 +5,13 @@ BASE REPOSITORY
 */
 
 import { HydratedDocument, Model } from "mongoose";
-import { DeliveryModel } from "../../modules/delivery/models/delivery.model";
 import { EntityKey } from "../enums";
 import { getEntityModel } from "../helpers";
 import { ResponseHandler } from "../models/response_handler";
 import { DOC_CREATED, DOC_DELETED, DOC_NOT_FOUND, DOC_UPDATED, ERROR, ID_NOT_MATCH, INTERNAL_SERVER_ERROR, OK, SUCCESS } from "../constants";
-import { stringify } from 'querystring';
-import * as ld from 'lodash';
+import ld from 'lodash';
+import { IDelivery } from "../../modules/delivery/models/delivery.model";
+import { BaseEntityType } from "../models/base_entity.model";
 
 /** 
 * ==== FIND ALL: 
@@ -84,8 +84,8 @@ export async function findById(key: EntityKey, id: string) {
 export async function create(key: EntityKey, dataToSave: object) {
   try {
     const model: Model<any>  = getEntityModel(key);
-    const doc: HydratedDocument<any> = new model(dataToSave);
-    const result = await doc.save();
+    const doc: HydratedDocument<BaseEntityType> = new model(dataToSave);
+    const result: BaseEntityType = await doc.save();
     return new ResponseHandler({
       statusCode: 201,
       code: OK,

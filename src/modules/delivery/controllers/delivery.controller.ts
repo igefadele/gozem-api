@@ -9,6 +9,7 @@ import * as br from '../../../core/repositories/base.repository';
 import { EntityKey } from '../../../core/enums';
 import { IDelivery } from '../models/delivery.model';
 import { ResponseHandler } from '../../../core/models/response_handler';
+import { broadcastDeliveryUpdateEvent } from '../../../core/websocket/websocket';
 
 
 
@@ -43,6 +44,8 @@ export const update = async (req: Request, res: Response) => {
     id: req.params.id,
     dataToUpdate: req.body 
   });
+  const deliveryData: IDelivery = response.data as IDelivery;
+  broadcastDeliveryUpdateEvent(deliveryData);
   res.status(response.statusCode).json(response);
 }
 

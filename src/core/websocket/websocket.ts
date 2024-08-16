@@ -21,6 +21,16 @@ export const handleIncomingEvent = (event: string) => {
   });
 }
 
+// Function to broadcast delivery updates to all connected clients
+export const broadcastDeliveryUpdateEvent = (delivery: IDelivery) => {
+  const payload: DeliveryUpdatedPayload = {
+    event: WsEventType.delivery_updated,
+    delivery_object: delivery,
+  };
+  io.emit(payload.event, JSON.stringify(payload));
+};
+
+
 // Function to update the location of a delivery
 const updateLocation = (delivery_id: string, location: string) => {
   console.log(`Updating location for delivery ${delivery_id} to ${location}`);
@@ -61,13 +71,5 @@ const setEndTime = (delivery_id: string, time: Date) => {
   // Code to set end_time
 };
 
-// Function to broadcast delivery updates to all connected clients
-export const broadcastDeliveryUpdate = (delivery: IDelivery) => {
-  const payload: DeliveryUpdatedPayload = {
-    event: WsEventType.delivery_updated,
-    delivery_object: delivery,
-  };
-  io.emit(MESSAGE, JSON.stringify(payload));
-};
 
 
