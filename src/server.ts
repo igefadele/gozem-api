@@ -2,12 +2,12 @@
 API SERVER FILE 
 */
 
-
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
 
 import { sessionConfig } from './configs/session.config';
 import { rateLimiter } from './configs/rate_limit.config';
@@ -18,6 +18,7 @@ import { serverErrorHandler } from './core/middlewares/server_error_handler.midd
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
 import { connectDB } from './configs/databases/mongodb.config';
 import { v4 as uuidv4} from 'uuid';
+import { connectSocketIO } from './configs/socketio.config';
 
 
 dotenv.config();
@@ -25,9 +26,13 @@ const PORT = process.env.PORT || 3000;
 console.log("MONGODB_URL", process.env.MONGODB_URL);
 
 const app = express();
+export const server = createServer(app);
 
 // Run the MongoDB Connection Function
 connectDB(); 
+
+// Run the SocketIO Connection Function
+connectSocketIO();
 
 app.use(sessionConfig);
 app.use(express.json());
