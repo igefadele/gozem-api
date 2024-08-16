@@ -3,15 +3,28 @@
 SOCKET.IO SETUP CONFIGURATION
 */
 
+import { Server as HttpServer } from 'http';
 import { Server } from 'socket.io';
-import { server } from '../server';
 import { CONNECTION, DISCONNECT, SOCKETIO_CONNECTED, SOCKETIO_DISCONNECTED } from '../core/constants';
 
-export const io = new Server(server);
+let io: Server;
 
-export const connectSocketIO = () => io.on(CONNECTION, (socket) => {
-  console.log(SOCKETIO_CONNECTED);
-  socket.on(DISCONNECT, () => {
-    console.log(SOCKETIO_DISCONNECTED);
+export const initializeSocketIO = (server: HttpServer) => {
+  io = new Server(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+    }
   });
-});
+
+  io.on(CONNECTION, (socket) => {
+    console.log(SOCKETIO_CONNECTED);
+    socket.on(DISCONNECT, () => {
+      console.log(SOCKETIO_DISCONNECTED);
+    });
+  });
+
+  return io;
+};
+
+export { io };

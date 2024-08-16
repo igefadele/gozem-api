@@ -17,7 +17,7 @@ import apiRoutes from './routes';
 import { serverErrorHandler } from './core/middlewares/server_error_handler.middleware';
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
 import { connectDB } from './configs/databases/mongodb.config';//
-import { connectSocketIO, io } from './configs/socketio.config';
+import { initializeSocketIO } from './configs/socketio.config';
 
 
 dotenv.config();
@@ -29,15 +29,17 @@ export const server = createServer(app);
 // Run the MongoDB Connection Function
 connectDB(); 
 
+// Run the SocketIO Connection Function
+initializeSocketIO(server);
+
 app.use(sessionConfig);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000"
+}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Run the SocketIO Connection Function
-connectSocketIO();
 
 app.use(logger);
 app.use(rateLimiter);
