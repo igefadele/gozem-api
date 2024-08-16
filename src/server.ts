@@ -17,6 +17,7 @@ import apiRoutes from './routes';
 import { serverErrorHandler } from './core/middlewares/server_error_handler.middleware';
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
 import { connectDB } from './configs/databases/mongodb.config';
+import { v4 as uuidv4} from 'uuid';
 
 
 dotenv.config();
@@ -24,6 +25,8 @@ const PORT = process.env.PORT || 3000;
 console.log("MONGODB_URL", process.env.MONGODB_URL);
 
 const app = express();
+
+console.log('uuid', uuidv4())
 
 // Run the MongoDB Connection Function
 connectDB(); 

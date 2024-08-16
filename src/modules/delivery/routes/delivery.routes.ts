@@ -13,7 +13,7 @@ router.get('/', deliveryController.findAll);
 
 router.get('/:id', deliveryController.findById);
 
-router.post('/:id', deliveryController.create);
+router.post('/', deliveryController.create);
 
 router.put('/:id', deliveryController.update);
 

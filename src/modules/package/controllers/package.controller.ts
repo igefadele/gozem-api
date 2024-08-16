@@ -39,7 +39,11 @@ export const create = async (req: Request, res: Response) => {
 /// Update a package record in the database using its uid as identifier
 export const update = async (req: Request, res: Response) => {
   const data: IPackage = req.body;
-  const response: ResponseHandler = await br.update(EntityKey.package, req.params.id, req.body);
+  const response: ResponseHandler = await br.update({
+      key: EntityKey.package,
+      id: req.params.id,
+      dataToUpdate: req.body 
+    });
   res.status(response.statusCode).json(response)
 }
 

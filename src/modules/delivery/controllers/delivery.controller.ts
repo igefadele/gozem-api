@@ -40,7 +40,11 @@ export const create = async (req: Request, res: Response) => {
 /// Update a delivery record in the database using its uid as identifier
 export const update = async (req: Request, res: Response) => {
   const data: IDelivery = req.body;
-  const response: ResponseHandler = await br.update(EntityKey.delivery, req.params.id, req.body);
+  const response: ResponseHandler = await br.update({
+    key: EntityKey.delivery,
+    id: req.params.id,
+    dataToUpdate: req.body 
+  });
   res.status(response.statusCode).json(response);
 }
 

@@ -4,22 +4,14 @@ BASE REPOSITORY
 ==============
 */
 
-import { Model } from "mongoose";
+import { HydratedDocument, Model } from "mongoose";
 import { DeliveryModel } from "../../modules/delivery/models/delivery.model";
 import { EntityKey } from "../enums";
 import { getEntityModel } from "../helpers";
 import { ResponseHandler } from "../models/response_handler";
-import { DOC_CREATED, DOC_DELETED, DOC_NOT_FOUND, DOC_UPDATED, INTERNAL_SERVER_ERROR, OK, SUCCESS } from "../constants";
+import { DOC_CREATED, DOC_DELETED, DOC_NOT_FOUND, DOC_UPDATED, ERROR, ID_NOT_MATCH, INTERNAL_SERVER_ERROR, OK, SUCCESS } from "../constants";
 import { stringify } from 'querystring';
 import * as ld from 'lodash';
-
-const defaultResponseHandler: ResponseHandler = new ResponseHandler({
-  statusCode: 200,
-  code: OK,
-  message: SUCCESS,
-  timestamp: new Date().toISOString(),
-  data: {message: SUCCESS},
-})
 
 /** 
 * ==== FIND ALL: 
@@ -29,13 +21,13 @@ export async function findAll(key: EntityKey) {
   try {
     const model = getEntityModel(key);
     const list: Document[] = await model.find();
-    const snapshot = list.map((doc) => new model(doc));
+    //const snapshot = list.map((doc) => new model(doc));
     return new ResponseHandler({
       statusCode: 200,
       code: OK,
       message: SUCCESS,
       timestamp: new Date().toISOString(),
-      data: snapshot,
+      data: list,
     })
   } catch (e: any) {
     return new ResponseHandler({
@@ -48,19 +40,22 @@ export async function findAll(key: EntityKey) {
   }
 }
 
+/** 
+* ==== FIND BY ID: 
+* Find a specific document by its ID in a collection  
+*/
 export async function findById(key: EntityKey, id: string) {
   let doc: Document | null;
   try {
     const model = getEntityModel(key);
     const result: Document | null = await model.findById(id);
     if (result) {
-      const snapshot = new model(result);
       return new ResponseHandler({
         statusCode: 200,
         code: OK,
         message: SUCCESS,
         timestamp: new Date().toISOString(),
-        data: snapshot,
+        data: result,
       });
     } else {
       return new ResponseHandler({
@@ -68,7 +63,7 @@ export async function findById(key: EntityKey, id: string) {
         code: OK,
         message: DOC_NOT_FOUND,
         timestamp: new Date().toISOString(),
-        data: {},
+        data: {message: DOC_NOT_FOUND},
       });
     }
   } catch (e: any) {
@@ -82,17 +77,21 @@ export async function findById(key: EntityKey, id: string) {
   }
 }
 
+/** 
+* ==== FIND ALL: 
+* Create a new document in a collection  
+*/
 export async function create(key: EntityKey, dataToSave: object) {
   try {
     const model: Model<any>  = getEntityModel(key);
-    const modelToSave: Model<any> = new model(dataToSave);
-    const result = await modelToSave.create();
+    const doc: HydratedDocument<any> = new model(dataToSave);
+    const result = await doc.save();
     return new ResponseHandler({
       statusCode: 201,
       code: OK,
-      message: SUCCESS,
+      message: DOC_CREATED,
       timestamp: new Date().toISOString(),
-      data: {message: DOC_CREATED},
+      data: result,
     });
   } catch (e: any) {
     return new ResponseHandler({
@@ -103,20 +102,34 @@ export async function create(key: EntityKey, dataToSave: object) {
       data: {message: INTERNAL_SERVER_ERROR}
     });
   }
- 
 }
 
-export async function update(key: EntityKey, id: string, data: object) {
+/** 
+* ==== FIND ALL: 
+* Update a document in a collection  
+*/
+export async function update(data: {key: EntityKey, id: string, dataToUpdate: object}) {
   try {
-    const model = getEntityModel(key);
-    const result = await model.findByIdAndUpdate(id, data);
-    return new ResponseHandler({
-      statusCode: 201,
-      code: OK,
-      message: SUCCESS,
-      timestamp: new Date().toISOString(),
-      data: {message: DOC_UPDATED},
-    });
+    const model = getEntityModel(data.key);
+    const isIdMatch: boolean = data.id === (data.dataToUpdate as any)._id as string
+    if (isIdMatch) {
+      const result = await model.findByIdAndUpdate(data.id, data.dataToUpdate, {new: true});
+      return new ResponseHandler({
+        statusCode: 201,
+        code: OK,
+        message: DOC_UPDATED,
+        timestamp: new Date().toISOString(),
+        data: result,
+      });
+    } else {
+      return new ResponseHandler({
+        statusCode: 500,
+        code: ERROR,
+        message: ID_NOT_MATCH,
+        timestamp: new Date().toISOString(),
+        data: {message: ID_NOT_MATCH}
+      });
+    }
   } catch (e: any) {
     return new ResponseHandler({
       statusCode: 500,
@@ -126,10 +139,12 @@ export async function update(key: EntityKey, id: string, data: object) {
       data: {message: INTERNAL_SERVER_ERROR}
     });
   }
-  
-
 }
 
+/** 
+* ==== FIND ALL: 
+* Delete/Remove a document from a collection  
+*/
 export async function remove(key: EntityKey, id: string) {
   try {
     const model = getEntityModel(key);
@@ -150,5 +165,4 @@ export async function remove(key: EntityKey, id: string) {
       data: {message: INTERNAL_SERVER_ERROR}
     });
   }
-  
 }
