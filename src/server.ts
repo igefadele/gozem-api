@@ -4,7 +4,6 @@ API SERVER FILE
 
 import express from 'express';
 import path from 'path';
-import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
@@ -18,6 +17,7 @@ import { serverErrorHandler } from './core/middlewares/server_error_handler.midd
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
 import { connectDB } from './configs/databases/mongodb.config';//
 import { initializeSocketIO } from './configs/socketio.config';
+import { corsConfig } from './configs/cors.config';
 
 
 dotenv.config();
@@ -36,9 +36,7 @@ app.use(sessionConfig);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({
-  origin: "http://localhost:3000"
-}));
+app.use(corsConfig);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(logger);
