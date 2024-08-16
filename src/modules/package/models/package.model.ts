@@ -5,13 +5,13 @@ PACKAGE MODEL
 /// Data Model for the Package Entity
 */
 
-import { LocationModel, LocationSchema } from "../../../core/models/location.model";
+import { LocationModel, locationSchema } from "../../../core/models/location.model";
 import { Schema, model, Document } from 'mongoose';
 import { validateGuid } from "../../../core/utils/validators";
 
 export interface IPackage extends Document {
   package_id: string;
-  active_delivery_id: string;
+  active_delivery_id?: string;
   description: string;
   weight: number; // grams (Integer)
   width: number; // cm (Integer)
@@ -26,7 +26,7 @@ export interface IPackage extends Document {
 }
 
 
-const PackageSchema = new Schema<IPackage>({
+const packageSchema = new Schema<IPackage>({
   package_id: {
     type: String,
     required: true,
@@ -38,7 +38,6 @@ const PackageSchema = new Schema<IPackage>({
   },
   active_delivery_id: {
     type: String,
-    required: true
   },
   description: {
     type: String,
@@ -84,7 +83,7 @@ const PackageSchema = new Schema<IPackage>({
     required: true
   },
   from_location: {
-    type: LocationSchema,
+    type: locationSchema,
     required: true
   }, 
   to_name: {
@@ -96,10 +95,10 @@ const PackageSchema = new Schema<IPackage>({
     required: true
   },
   to_location: {
-    type: LocationSchema,
+    type: locationSchema,
     required: true
   },   
 });
 
 
-export const PackageModel = model('Package', PackageSchema);
+export const PackageModel = model('Package', packageSchema);

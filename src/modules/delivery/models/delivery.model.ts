@@ -6,7 +6,7 @@ DELIVERY MODEL
 */
 
 import { DeliveryStatus } from "../../../core/enums";
-import { LocationModel, LocationSchema } from "../../../core/models/location.model";
+import { LocationModel, locationSchema } from "../../../core/models/location.model";
 import { Schema, model, Document } from 'mongoose';
 import { validateGuid } from "../../../core/utils/validators";
 
@@ -20,7 +20,7 @@ export interface IDelivery extends Document {
   status: string;
 }
 
-const DeliverySchema = new Schema<IDelivery>({
+const deliverySchema = new Schema<IDelivery>({
   delivery_id: {
     type: String,
     required: true,
@@ -47,7 +47,7 @@ const DeliverySchema = new Schema<IDelivery>({
     required: true,
   },    // timestamp
   location: {
-    type: LocationSchema,
+    type: locationSchema,
     required: true,
   }, 
   status: {
@@ -57,4 +57,4 @@ const DeliverySchema = new Schema<IDelivery>({
   },
 });
 
-export const DeliveryModel = model('Delivery', DeliverySchema);
+export const DeliveryModel = model('Delivery', deliverySchema);

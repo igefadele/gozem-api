@@ -5,7 +5,7 @@ export interface LocationModel {
   lng: number
 }
 
-export const LocationSchema = new Schema<LocationModel>({
+export const locationSchema = new Schema<LocationModel>({
   lat: {
     type: Number,
     required: true,
