@@ -1,6 +1,6 @@
 /* 
 =======
-HELPERS
+UTILITY FUNCTIONS
 =======
 */
 import { Request, Response } from 'express';

@@ -1,3 +1,13 @@
+/* 
+===================
+BASE ENUMS
+*/
+
+export enum EntityKey{
+  delivery = 'delivery',
+  package = 'package',
+}
+
 export enum DeliveryStatus {
   open = 'open',
   pickedUp = 'picked-up',
@@ -5,3 +15,4 @@ export enum DeliveryStatus {
   delivered = 'delivered',
   failed = 'failed',
 }
+

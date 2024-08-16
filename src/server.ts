@@ -24,7 +24,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-connectDB(); // Run the MongoDB Connection Function
+// Run the MongoDB Connection Function
+connectDB(); 
 
 app.use(sessionConfig);
 app.use(express.json());

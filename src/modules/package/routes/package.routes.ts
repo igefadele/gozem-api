@@ -11,12 +11,12 @@ export const router = express.Router();
 
 router.get('/', packageController.findAll);
 
-router.get('/', packageController.findByUid);
+router.get('/:id', packageController.findById);
 
-router.post('/', packageController.createOne);
+router.post('/:id', packageController.create);
 
-router.put('/', packageController.updateByUid);
+router.put('/:id', packageController.update);
 
-router.delete('/', packageController.deleteByUid);
+router.delete('/:id', packageController.remove);
 
 

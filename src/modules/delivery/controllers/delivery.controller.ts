@@ -7,35 +7,46 @@ DELIVERY CONTROLLER
 import express from 'express';
 import { Request, Response } from 'express';
 import { hasEmptyFields } from '../../../core/utils';
+import * as br from '../../../core/repositories/base.repository';
+import { EntityKey } from '../../../core/enums';
+import { DeliveryModel, IDelivery } from '../models/delivery.model';
+import { ResponseHandler } from '../../../core/models/response_handler';
 
 
 
-/// FINDALL
+/// FIND ALL: 
 /// Fetch all deliveries in the database
-export const findAll = async () => {
-
+export const findAll = async (req: Request, res: Response) => {
+  const response: ResponseHandler = await br.findAll(EntityKey.delivery);
+  res.status(response.statusCode).json(response)
 }
 
-/// FINDBYUID
+/// FIND BY ID
 /// Fetch a single delivery from the database using the delivery uid
-export const findByUid = async () => {
-  
+export const findById = async (req: Request, res: Response) => {
+  const response: ResponseHandler = await br.findById(EntityKey.delivery, req.params.id);
+  res.status(response.statusCode).json(response);
 }
 
-/// CREATONE
+/// CREAT ONE
 /// Create a delivery record in the database
-export const createOne = async () => {
-  
+export const create = async (req: Request, res: Response) => {
+  const data: IDelivery = req.body;
+  const response: ResponseHandler = await br.create(EntityKey.delivery, req.body);
+  res.status(response.statusCode).json(response);
 }
 
-/// UPDATEBYUID
+/// UPDATE BY ID
 /// Update a delivery record in the database using its uid as identifier
-export const updateByUid = async () => {
-  
+export const update = async (req: Request, res: Response) => {
+  const data: IDelivery = req.body;
+  const response: ResponseHandler = await br.update(EntityKey.delivery, req.params.id, req.body);
+  res.status(response.statusCode).json(response);
 }
 
-/// DELETEBYUID
+/// DELETE BY ID
 /// Delete a delivery record from the database using its uid as identifier
-export const deleteByUid = async () => {
-  
+export const remove = async (req: Request, res: Response) => {
+  const response: ResponseHandler = await br.remove(EntityKey.delivery, req.params.id);
+  res.status(response.statusCode).json(response);
 }

@@ -46,6 +46,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express-session": "^1.18.0",
+    "@types/lodash": "^4.17.7",
     "@types/mailchimp__mailchimp_marketing": "^3.0.20",
     "@types/md5": "^2.3.5",
     "@types/mongoose": "^5.11.97",
