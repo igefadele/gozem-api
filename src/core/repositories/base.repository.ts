@@ -78,7 +78,7 @@ export async function findById(key: EntityKey, id: string) {
 }
 
 /** 
-* ==== FIND ALL: 
+* ==== CREATE ONE: 
 * Create a new document in a collection  
 */
 export async function create(key: EntityKey, dataToSave: object) {
@@ -105,8 +105,8 @@ export async function create(key: EntityKey, dataToSave: object) {
 }
 
 /** 
-* ==== FIND ALL: 
-* Update a document in a collection  
+* ==== UPDATE ONE BY OBJECTID: 
+* Update a document in a collection using its ObjectId as identifier
 */
 export async function update(data: {key: EntityKey, id: string, dataToUpdate: object}) {
   try {
@@ -141,8 +141,36 @@ export async function update(data: {key: EntityKey, id: string, dataToUpdate: ob
   }
 }
 
+
 /** 
-* ==== FIND ALL: 
+* ==== UPDATE ONE BY PROVIDED QUERY: 
+* Update a document in a collection using a provided query as identifier
+*/
+export async function updateByQuery(data: {key: EntityKey, query: object, dataToUpdate: object}) {
+  try {
+    const model = getEntityModel(data.key);
+    const result = await model.findOneAndUpdate(data.query , data.dataToUpdate, {new: true});
+      return new ResponseHandler({
+        statusCode: 201,
+        code: OK,
+        message: DOC_UPDATED,
+        timestamp: new Date().toISOString(),
+        data: result,
+      });
+  } catch (e: any) {
+    return new ResponseHandler({
+      statusCode: 500,
+      code: ld.isString(e.code) ? e.code : ''+e.code,
+      message: e.message,
+      timestamp: new Date().toISOString(),
+      data: {message: INTERNAL_SERVER_ERROR}
+    });
+  }
+}
+
+
+/** 
+* ==== REMOVE/DELETE ONE: 
 * Delete/Remove a document from a collection  
 */
 export async function remove(key: EntityKey, id: string) {

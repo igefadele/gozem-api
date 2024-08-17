@@ -35,8 +35,8 @@ export const create = async (req: Request, res: Response) => {
   res.status(response.statusCode).json(response);
 }
 
-/// UPDATE BY ID
-/// Update a delivery record in the database using its uid as identifier
+/// UPDATE BY OBJECTID (_id)
+/// Update a delivery record in the database using its ObjectId as identifier
 export const update = async (req: Request, res: Response) => {
   const data: IDelivery = req.body;
   const response: ResponseHandler = await br.update({
@@ -47,6 +47,20 @@ export const update = async (req: Request, res: Response) => {
   const deliveryData: IDelivery = response.data as IDelivery;
   broadcastDeliveryUpdateEvent(deliveryData);
   res.status(response.statusCode).json(response);
+}
+
+
+/// UPDATE BY DELIVERY_ID (GUID/UUID)
+/// Update a delivery record in the database using its delivery_id as identifier
+export const updateByDeliveryId = async (delivery_id: string, dataToUpdate: object) => {
+  const query: object = {"delivery_id": delivery_id}
+  const response: ResponseHandler = await br.updateByQuery({
+    key: EntityKey.delivery,
+    query: query,
+    dataToUpdate: dataToUpdate 
+  });
+  const deliveryData: IDelivery = response.data as IDelivery;
+  broadcastDeliveryUpdateEvent(deliveryData);
 }
 
 /// DELETE BY ID

@@ -2,19 +2,25 @@
 ==============
 WEBSOCKET METHODS
 */
+
 import { DeliveryEventPayload, DeliveryUpdatedPayload } from '../models/ws_events_models';
 import { IDelivery } from '../../modules/delivery/models/delivery.model';
 import { DeliveryStatus, WsEventType } from '../enums';
 import { io } from '../../configs/socketio.config';
+import * as deliveryController from '../../modules/delivery/controllers/delivery.controller';
 
+/** 
+ * ==== HANDLE INCOMING EVENTS: 
+ * Function to handle incoming events (location_changed, status_changed)
+*/
 
-// Function to handle incoming events (location_changed, status_changed)
-export const handleIncomingEvent = (event: string) => {
-  io.on(event, (data) => {
-    const payload: DeliveryEventPayload = JSON.parse(data.toString());
+export const handleIncomingEvent = (payload: DeliveryEventPayload) => {
+  io.on(payload.event, async () => {
+  //io.on(payload.event, (data) => {
+    //const payload: DeliveryEventPayload = JSON.parse(data.toString());
     switch (payload.event) {
       case WsEventType.location_changed:
-        updateLocation(payload.delivery_id, payload.location);
+       await deliveryController.updateByDeliveryId(payload.delivery_id, {location: payload.location});
         break;
       case WsEventType.status_changed:
         updateStatus(payload.delivery_id, payload.status);
@@ -23,54 +29,39 @@ export const handleIncomingEvent = (event: string) => {
   });
 }
 
-// Function to broadcast delivery updates to all connected clients
+/**  
+ * ==== UPDATE DELIVERY STATUS: 
+ * Function to update the status of a delivery and set appropriate time fields
+*/
+
+const updateStatus = async (delivery_id: string, status: string) => {
+  console.log(`Updating status for delivery ${delivery_id} to ${status}`);
+  const currentTime = new Date();
+  switch (status) {
+    case DeliveryStatus.pickedUp:
+      await deliveryController.updateByDeliveryId(delivery_id, {pickup_time: currentTime});
+      break;
+    case DeliveryStatus.inTransit:
+      await deliveryController.updateByDeliveryId(delivery_id, {start_time: currentTime});
+      break;
+    case DeliveryStatus.delivered:
+    case DeliveryStatus.failed:
+      await deliveryController.updateByDeliveryId(delivery_id, {end_time: currentTime});
+      break;
+  }
+};
+
+/**  
+ * ==== BROADCAST DELIVERY UPDATE EVENT: 
+ * Function to broadcast delivery updates to all connected clients
+*/
+
 export const broadcastDeliveryUpdateEvent = (delivery: IDelivery) => {
   const payload: DeliveryUpdatedPayload = {
     event: WsEventType.delivery_updated,
     delivery_object: delivery,
   };
-  io.emit(payload.event, JSON.stringify(payload));
-};
-
-
-// Function to update the location of a delivery
-const updateLocation = (delivery_id: string, location: string) => {
-  console.log(`Updating location for delivery ${delivery_id} to ${location}`);
-  // Code to update location
-};
-
-// Function to update the status of a delivery and set appropriate time fields
-const updateStatus = (delivery_id: string, status: string) => {
-  console.log(`Updating status for delivery ${delivery_id} to ${status}`);
-  const currentTime = new Date();
-  switch (status) {
-    case DeliveryStatus.pickedUp:
-      setPickupTime(delivery_id, currentTime);
-      break;
-    case DeliveryStatus.inTransit:
-      setStartTime(delivery_id, currentTime);
-      break;
-    case DeliveryStatus.delivered:
-    case DeliveryStatus.failed:
-      setEndTime(delivery_id, currentTime);
-      break;
-  }
-};
-
-// Functions to set specific time fields
-const setPickupTime = (delivery_id: string, time: Date) => {
-  console.log(`Setting pickup time for delivery ${delivery_id}`);
-  // Code to set pickup_time
-};
-
-const setStartTime = (delivery_id: string, time: Date) => {
-  console.log(`Setting start time for delivery ${delivery_id}`);
-  // Code to set start_time
-};
-
-const setEndTime = (delivery_id: string, time: Date) => {
-  console.log(`Setting end time for delivery ${delivery_id}`);
-  // Code to set end_time
+  io.emit(payload.event, JSON.stringify(payload, null, 2));
 };
 
 

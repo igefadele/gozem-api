@@ -9,6 +9,7 @@ import * as br from '../../../core/repositories/base.repository'; // br = baseRe
 import { EntityKey } from '../../../core/enums';
 import { IPackage } from '../models/package.model';
 import { ResponseHandler } from '../../../core/models/response_handler';
+import { PACKAGE_ID } from '../../../core/constants';
 
 
 /// FIND ALL
@@ -33,8 +34,8 @@ export const create = async (req: Request, res: Response) => {
   res.status(response.statusCode).json(response)
 }
 
-/// UPDATE BY ID
-/// Update a package record in the database using its uid as identifier
+/// UPDATE BY OBJECTID (_id)
+/// Update a package record in the database using its ObjectId as identifier
 export const update = async (req: Request, res: Response) => {
   const data: IPackage = req.body;
   const response: ResponseHandler = await br.update({
@@ -43,6 +44,19 @@ export const update = async (req: Request, res: Response) => {
       dataToUpdate: req.body 
     });
   res.status(response.statusCode).json(response)
+}
+
+/// UPDATE BY PACKAGE_ID (GUID/UUID)
+/// Update a package record in the database using its package_id as identifier
+export const updateByPackageId = async (package_id: string, dataToUpdate: object) => {
+  const query: object = { PACKAGE_ID: package_id };
+  const response: ResponseHandler = await br.updateByQuery({
+    key: EntityKey.package,
+    query: query,
+    dataToUpdate: dataToUpdate 
+  });
+  const packageData: IPackage = response.data as IPackage;
+  //broadcastPackageUpdateEvent(packageData);  /// To be implemented when required
 }
 
 /// DELETE BY ID

@@ -25,3 +25,6 @@ export const DISCONNECT = "disconnect";
 export const MESSAGE = "message";
 export const SOCKETIO_CONNECTED = "SocketIO connection from a client is established";
 export const SOCKETIO_DISCONNECTED = "SocketIO connection disconnected";
+
+export const DELIVERY_ID = "delivery_id";
+export const PACKAGE_ID = "package_id";
