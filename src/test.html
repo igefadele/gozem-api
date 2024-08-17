@@ -38,7 +38,7 @@
 
         socket.emit('location_changed', locationEventPayload);
 
-        //socket.emit('status_changed', statusEventPayload);
+        socket.emit('status_changed', statusEventPayload);
 
         socket.on('disconnect', () => {
             console.log('Disconnected from the WebSocket server');

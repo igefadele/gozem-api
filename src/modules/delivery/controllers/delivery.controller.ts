@@ -61,7 +61,6 @@ export const updateByDeliveryId = async (delivery_id: string, dataToUpdate: obje
     dataToUpdate: dataToUpdate 
   });
   const deliveryData: IDelivery = response.data as IDelivery;
-  console.log("updateByDeliveryId => deliveryData:", deliveryData);
   broadcastDeliveryUpdateEvent(deliveryData);
 }
 

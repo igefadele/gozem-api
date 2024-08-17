@@ -18,8 +18,6 @@ import { UNHANDLED_WS_EVENT_TYPE, UNKNOWN_INCOMING_WS_EVENT_TYPE } from '../cons
 */
 
 export const handleIncomingEvent = (socket: Socket) => {
-  console.log(`Running handleIncomingEvent function ;;;;;;;;;;;;;;;;;;;;;;;;`);
-
   let payload: DeliveryIncomingEventPayload;
   const incomingEventList: IncomingWsEventType[] = Object.values(IncomingWsEventType);
   socket.onAny(async (event: IncomingWsEventType, data: DeliveryIncomingEventPayload) => {
@@ -49,7 +47,6 @@ export const handleIncomingEvent = (socket: Socket) => {
 */
 
 const updateStatus = async (delivery_id: string, status: string) => {
-  console.log(`Updating status for delivery ${delivery_id} to ${status}`);
   const currentTime = new Date();
   switch (status) {
     case DeliveryStatus.pickedUp:
