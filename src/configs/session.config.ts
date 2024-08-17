@@ -4,13 +4,12 @@ SESSION CONFIGURATIONS
 */
 
 import session from 'express-session';
-import dotenv from 'dotenv';
+import { SESSION_SECRET, SECURE_COOKIE } from './env.config';
 
-dotenv.config();
 
 export const sessionConfig = session({
-  secret: process.env.SESSION_SECRET as string,
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: process.env.SECURE_COOKIE === 'true' } 
+  cookie: { secure: SECURE_COOKIE === 'true' } 
 });

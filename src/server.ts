@@ -5,7 +5,6 @@ API SERVER FILE
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import { createServer } from 'http';
 
 import { sessionConfig } from './configs/session.config';
@@ -18,10 +17,8 @@ import { notFoundHandler } from './core/middlewares/not_found_handler.middleware
 import { connectDB } from './configs/databases/mongodb.config';//
 import { initializeSocketIO } from './configs/socketio.config';
 import { corsConfig } from './configs/cors.config';
+import { BASE_URL, PORT } from './configs/env.config';
 
-
-dotenv.config();
-const PORT = process.env.PORT || 3000;
 
 const app = express();
 export const server = createServer(app);
@@ -49,6 +46,13 @@ app.use(notFoundHandler);
 
 // Start server and listens on the specified PORT
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${BASE_URL}`);
 });
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+      console.log('Process terminated');
+  });
+});
+
 

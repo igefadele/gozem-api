@@ -5,15 +5,16 @@ SOCKET.IO SETUP CONFIGURATION
 
 import { Server as HttpServer } from 'http';
 import { Server } from 'socket.io';
-import { CONNECTION, DISCONNECT, SOCKETIO_CONNECTED, SOCKETIO_DISCONNECTED } from '../core/constants';
+import { CONNECTION, DELETE, DISCONNECT, GET, POST, PUT, SOCKETIO_CONNECTED, SOCKETIO_DISCONNECTED } from '../core/constants';
+import { BASE_URL } from './env.config';
 
 let io: Server;
 
 export const initializeSocketIO = (server: HttpServer) => {
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST"],
+      origin: BASE_URL,
+      methods: [GET, POST, PUT, DELETE],
     }
   });
 
