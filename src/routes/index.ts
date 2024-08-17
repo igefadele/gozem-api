@@ -16,7 +16,7 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.get('/ws', (req, res) => {
-  res.sendFile(join(__dirname, '../test.html'));
+  res.sendFile(join(__dirname, '../ws_test.html'));
 });
 
 router.use('/delivery', deliveryRouter);
