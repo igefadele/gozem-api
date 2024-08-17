@@ -28,3 +28,6 @@ export const SOCKETIO_DISCONNECTED = "SocketIO connection disconnected";
 
 export const DELIVERY_ID = "delivery_id";
 export const PACKAGE_ID = "package_id";
+
+export const UNKNOWN_INCOMING_WS_EVENT_TYPE = "Received an unknown incoming event";
+export const UNHANDLED_WS_EVENT_TYPE = "package_id";

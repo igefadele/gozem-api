@@ -149,7 +149,9 @@ export async function update(data: {key: EntityKey, id: string, dataToUpdate: ob
 export async function updateByQuery(data: {key: EntityKey, query: object, dataToUpdate: object}) {
   try {
     const model = getEntityModel(data.key);
-    const result = await model.findOneAndUpdate(data.query , data.dataToUpdate, {new: true});
+    const result = await model.findOneAndUpdate(data.query, data.dataToUpdate, { new: true });
+    console.log("updateByQuery => query:", data.query);
+    console.log("updateByQuery => dataToUpdate:", data.dataToUpdate);
       return new ResponseHandler({
         statusCode: 201,
         code: OK,

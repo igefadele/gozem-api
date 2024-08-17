@@ -10,6 +10,7 @@ import { EntityKey } from '../../../core/enums';
 import { IDelivery } from '../models/delivery.model';
 import { ResponseHandler } from '../../../core/models/response_handler';
 import { broadcastDeliveryUpdateEvent } from '../../../core/websocket/websocket';
+import { DELIVERY_ID } from '../../../core/constants';
 
 
 
@@ -53,13 +54,14 @@ export const update = async (req: Request, res: Response) => {
 /// UPDATE BY DELIVERY_ID (GUID/UUID)
 /// Update a delivery record in the database using its delivery_id as identifier
 export const updateByDeliveryId = async (delivery_id: string, dataToUpdate: object) => {
-  const query: object = {"delivery_id": delivery_id}
+  const query: object = {[DELIVERY_ID]: delivery_id};
   const response: ResponseHandler = await br.updateByQuery({
     key: EntityKey.delivery,
     query: query,
     dataToUpdate: dataToUpdate 
   });
   const deliveryData: IDelivery = response.data as IDelivery;
+  console.log("updateByDeliveryId => deliveryData:", deliveryData);
   broadcastDeliveryUpdateEvent(deliveryData);
 }
 

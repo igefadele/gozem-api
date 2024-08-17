@@ -17,7 +17,7 @@ export interface IDelivery extends Document {
   start_time: Date;  //timestamp
   end_time: Date;  // timestamp
   location: LocationModel; 
-  status: string;
+  status: DeliveryStatus;
 }
 
 const deliverySchema = new Schema<IDelivery>({

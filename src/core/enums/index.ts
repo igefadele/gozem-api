@@ -21,3 +21,8 @@ export enum WsEventType {
   status_changed = "status_changed",
   delivery_updated = "delivery_updated",
 }
+
+export enum IncomingWsEventType {
+  location_changed = "location_changed",
+  status_changed = "status_changed",
+}

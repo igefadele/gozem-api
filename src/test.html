@@ -12,13 +12,33 @@
         // Connect to the server running on http://localhost:3000
         const socket = io('http://localhost:3000');
 
+        locationEventPayload = {
+          event: "location_changed",
+          delivery_id: "95ca4f3d-7792-4b76-804c-b6a23d59e31f",
+          location: {
+            "lat": 37.2242,
+            "lng": -115.3215,
+            "_id": "66bf48f4c34faeb00856f3d5"
+          }
+        }
+
+        statusEventPayload = {
+          event: "status_changed",
+          delivery_id: "95ca4f3d-7792-4b76-804c-b6a23d59e31f",
+          status: "in-transit"
+        }
+
         socket.on('connect', () => {
             console.log('Connected to the WebSocket server');
         });
 
         socket.on('delivery_updated', (data) => {
           console.log("DELIVERY:", data);
-      });
+        });
+
+        socket.emit('location_changed', locationEventPayload);
+
+        //socket.emit('status_changed', statusEventPayload);
 
         socket.on('disconnect', () => {
             console.log('Disconnected from the WebSocket server');
