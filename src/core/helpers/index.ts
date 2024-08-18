@@ -12,7 +12,7 @@ interface BaseEntity extends Document {
   _id: string;
 }
 
-/** ==== GET MONGOOSE MODEL
+/** ==== GET MONGOOSE MODEL: 
 Get the Mongoose Model for the Entity which its enum key is provided */
 export function getEntityModel(key: EntityKey): Model<any>{
   switch (key) {
