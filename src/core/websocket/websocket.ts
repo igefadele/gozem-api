@@ -71,7 +71,8 @@ export const broadcastDeliveryUpdateEvent = (delivery: IDelivery) => {
     event: WsEventType.delivery_updated,
     delivery_object: delivery,
   };
-  io.emit(payload.event, JSON.stringify(payload, null, 2));
+  //io.emit(payload.event, JSON.stringify(payload, null, 2));
+  io.emit(payload.event, payload);
 };
 
 
