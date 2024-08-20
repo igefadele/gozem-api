@@ -6,9 +6,9 @@ BASE REPOSITORY
 
 import { HydratedDocument, Model } from "mongoose";
 import { EntityKey } from "../enums";
-import { getEntityModel } from "../helpers";
+import { getEntityModel } from "../../core/helpers";
 import { ResponseHandler } from "../models/response_handler";
-import { DOC_CREATED, DOC_DELETED, DOC_UPDATED, INTERNAL_SERVER_ERROR, OK, SUCCESS } from "../constants";
+import { DOC_CREATED, DOC_DELETED, DOC_UPDATED, INTERNAL_SERVER_ERROR, OK, SUCCESS } from "../../core/constants";
 import ld from 'lodash';
 import { BaseEntityType } from "../models/base_entity.model";
 

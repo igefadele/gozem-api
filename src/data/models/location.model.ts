@@ -5,12 +5,12 @@ LOCATION MODEL
 
 import { Schema } from "mongoose";
 
-export interface LocationModel {
+export interface ILocation {
   lat: number;
   lng: number
 }
 
-export const locationSchema = new Schema<LocationModel>({
+export const locationSchema = new Schema<ILocation>({
   lat: {
     type: Number,
     required: true,

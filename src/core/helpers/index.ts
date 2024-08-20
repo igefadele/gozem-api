@@ -6,7 +6,7 @@ BASE HELPERS
 import { Model } from "mongoose";
 import { IDelivery, DeliveryModel } from "../../modules/delivery/models/delivery.model";
 import { PackageModel } from "../../modules/package/models/package.model";
-import { EntityKey } from "../enums";
+import { EntityKey } from "../../data/enums";
 
 interface BaseEntity extends Document {
   _id: string;

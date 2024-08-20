@@ -9,7 +9,7 @@ import { DeliveryStatus, IncomingWsEventType, WsEventType } from '../enums';
 import { io } from '../../configs/socketio.config';
 import * as deliveryController from '../../modules/delivery/controllers/delivery.controller';
 import { Socket } from 'socket.io';
-import { UNHANDLED_WS_EVENT_TYPE, UNKNOWN_INCOMING_WS_EVENT_TYPE } from '../constants';
+import { UNHANDLED_WS_EVENT_TYPE, UNKNOWN_INCOMING_WS_EVENT_TYPE } from '../../core/constants';
 
 /** 
  * ==== HANDLE INCOMING EVENTS: 
@@ -45,18 +45,18 @@ export const handleIncomingEvent = (socket: Socket) => {
  * Function to update the status of a delivery and set appropriate time fields
 */
 
-const updateStatus = async (delivery_id: string, status: string) => {
+const updateStatus = async (delivery_id: string, status: DeliveryStatus) => {
   const currentTime = new Date();
   switch (status) {
     case DeliveryStatus.pickedUp:
-      await deliveryController.updateInPart(delivery_id, {pickup_time: currentTime});
+      await deliveryController.updateInPart(delivery_id, {status: status, pickup_time: currentTime});
       break;
     case DeliveryStatus.inTransit:
-      await deliveryController.updateInPart(delivery_id, {start_time: currentTime});
+      await deliveryController.updateInPart(delivery_id, {status: status, start_time: currentTime});
       break;
     case DeliveryStatus.delivered:
     case DeliveryStatus.failed:
-      await deliveryController.updateInPart(delivery_id, {end_time: currentTime});
+      await deliveryController.updateInPart(delivery_id, {status: status, end_time: currentTime});
       break;
   }
 };

@@ -5,8 +5,8 @@ DELIVERY MODEL
 /// Data Model for the Delivery Entity
 */
 
-import { DeliveryStatus } from "../../../core/enums";
-import { LocationModel, locationSchema } from "../../../core/models/location.model";
+import { DeliveryStatus } from "../../../data/enums";
+import { ILocation, locationSchema } from "../../../data/models/location.model";
 import { Schema, model, Document } from 'mongoose';
 import { validateGuid } from "../../../core/utils/validators";
 
@@ -16,7 +16,7 @@ export interface IDelivery extends Document {
   pickup_time: Date; // timestamp
   start_time: Date;  //timestamp
   end_time: Date;  // timestamp
-  location: LocationModel; 
+  location: ILocation; 
   status: DeliveryStatus;
 }
 

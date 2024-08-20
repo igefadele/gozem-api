@@ -5,11 +5,11 @@ DELIVERY CONTROLLER
 */
 
 import { Request, Response } from 'express';
-import * as br from '../../../core/repositories/base.repository';
-import { EntityKey } from '../../../core/enums';
+import * as br from '../../../data/repositories/base.repository';
+import { EntityKey } from '../../../data/enums';
 import { IDelivery } from '../models/delivery.model';
-import { ResponseHandler } from '../../../core/models/response_handler';
-import { broadcastDeliveryUpdateEvent } from '../../../core/websocket/websocket';
+import { ResponseHandler } from '../../../data/models/response_handler';
+import { broadcastDeliveryUpdateEvent } from '../../../data/websocket/websocket';
 import { DELIVERY_ID } from '../../../core/constants';
 
 

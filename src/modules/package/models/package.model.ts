@@ -5,7 +5,7 @@ PACKAGE MODEL
 /// Data Model for the Package Entity
 */
 
-import { LocationModel, locationSchema } from "../../../core/models/location.model";
+import { ILocation, locationSchema } from "../../../data/models/location.model";
 import { Schema, model, Document } from 'mongoose';
 import { validateGuid } from "../../../core/utils/validators";
 
@@ -19,10 +19,10 @@ export interface IPackage extends Document {
   depth: number; // cm (Integer)
   from_name: string;
   from_address: string;
-  from_location: LocationModel;
+  from_location: ILocation;
   to_name: string;
   to_address: string;
-  to_location: LocationModel;
+  to_location: ILocation;
 }
 
 

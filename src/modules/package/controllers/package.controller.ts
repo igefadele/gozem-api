@@ -5,10 +5,10 @@ PACKAGE CONTROLLER
 */
 
 import { Request, Response } from 'express';
-import * as br from '../../../core/repositories/base.repository';
-import { EntityKey } from '../../../core/enums';
+import * as br from '../../../data/repositories/base.repository';
+import { EntityKey } from '../../../data/enums';
 import { IPackage } from '../models/package.model';
-import { ResponseHandler } from '../../../core/models/response_handler';
+import { ResponseHandler } from '../../../data/models/response_handler';
 import { PACKAGE_ID } from '../../../core/constants';
 
 
