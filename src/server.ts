@@ -16,7 +16,7 @@ import { serverErrorHandler } from './core/middlewares/server_error_handler.midd
 import { notFoundHandler } from './core/middlewares/not_found_handler.middleware';
 import { connectDB } from './configs/databases/mongodb.config';//
 import { initializeSocketIO } from './configs/socketio.config';
-import { corsConfig } from './configs/cors.config';
+import { corsConfig } from './core/middlewares/cors.middleware';
 import { BASE_URL, PORT } from './configs/env.config';
 
 

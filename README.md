@@ -19,10 +19,23 @@ You can easily build on this to create a full-fledged Real-time Logistics and Co
 - Modules, Repositories, Providers, Utils, Services, Values, Themes, etc: All Structure Set.
 - And many more...
 
-== This Repo contains the REST API and the Websocket backend, the Clients application for Customer, Driver, and Admin are deployed on a separate Repo.
+### This Repo:
+== This Repo contains the REST API and the Websocket backend, the Clients application for Customer, Driver, and Admin are deployed on a separate [Repo](https://github.com/igefadele/logistics-clients/).
+== Get the Clients apps (frontend apps codes) on: [Logistics/Courier Client Apps](https://github.com/igefadele/logistics-clients/)
 
 ### Note: 
 - If you are using this codebase in an enterprise software, I require you to give proper reference and attribution to me as the Author. Also, I would love to help your organisation in getting the best out of this project and your intended app. So reach out to me: [Ige Fadele (Mr FIA)](https://linkedin.com/in/igefadele)
+
+
+## Demos
+
+[API: https://logistics-api-07i7.onrender.com](https://logistics-api-07i7.onrender.com)
+
+[TRACKER/CUSTOMER: https://logistics-tracker.onrender.com](https://logistics-tracker.onrender.com)
+
+[DRIVER: https://logistics-driver.onrender.com](https://logistics-driver.onrender.com)
+
+[ADMIN: https://logistics-admin-t9z7.onrender.com](https://logistics-admin-t9z7.onrender.com)
 
 
 ## Tools, Packages, & Dependencies
@@ -38,8 +51,8 @@ You can easily build on this to create a full-fledged Real-time Logistics and Co
 
 With a decade of experience building solution-focused enterprise-grade digital products (Software, Mobile Apps, Web Apps, Desktop Apps, etc.), my experience and skillset will be priceless for the success of your organisation's projects/products.
 
-### How I can contribute:
-- Provide your team with highly useful technical guidelines, industry best practices and many more for a productive product development experience.
+### How I can contribute/help:
+- I can provide your team with highly useful technical guidelines, industry best practices and many more for a productive product development experience.
 - With experience across technical, analytical, and business corridors, I could provide your team and organisation with insights, guidance, etc. which will help you achieve your business bottomline quicker and cleaner.
 
 ### Main Tech Stack

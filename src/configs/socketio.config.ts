@@ -8,7 +8,7 @@ import { Server } from 'socket.io';
 import { CONNECTION, DELETE, DISCONNECT, GET, POST, PUT, SOCKETIO_CONNECTED, SOCKETIO_DISCONNECTED } from '../core/constants';
 import { BASE_URL } from './env.config';
 import { handleIncomingEvent } from '../data/websocket/websocket';
-import { corsOption } from './cors.config';
+import { corsOption } from '../core/middlewares/cors.middleware';
 
 let io: Server;
 
