@@ -57,5 +57,24 @@ With a decade of experience building solution-focused enterprise-grade digital p
 - RactJS + NextJS + Angular + ExpressJS + NodeJS + TypeScript : Websites and Web Apps, SSR, And many more.
 - Flutter and Dart (With Kotlin, Swift): Android App, iOS App, PWA (Progressive Web Apps), Web App, MacOS Desktop App, Windows Desktop, Linux Desktop.
 - OpenAI, LangChain, LLM, RAG, etc: For Artificial Intelligence products and integrations
+- Python and associated Libraries and Packages, PowerBI, Tableau: Data Science, Data Analytics, BI and Visualizations.
 - Different DBs & Platforms: SQL, NoSQL, BaaS, PaaS 
+- React Native, Ionic, PHP, Laravel, etc.
 - And Some Others: 
+
+
+## Connect with me
+
+> [GitHub: https://github.com/igefadele](https://github.com/igefadele)
+
+> [LinkedIn: https://https://linkedin.com/in/igefadele](https://https://linkedin.com/in/igefadele)
+
+> [Twitter: https://twitter.com/igefadele](https://twitter.com/igefadele)
+
+> [Facebook: https://facebook.com/igefadele](https://facebook.com/igefadele)
+
+> [YouTube: https://www.youtube.com/@igefadele](https://www.youtube.com/@igefadele)
+
+> [Instagram: https://instagram.com/igefadele](https://instagram.com/igefadele)
+
+> [Tiktok: https://tiktok.com/@igefadele](https://tiktok.com/@igefadele)
